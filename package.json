@@ -1,0 +1,27 @@
+{
+  "name": "watchy",
+  "version": "1.0.0",
+  "description": "This project is inspired by netflix, I&#39;m litterally doing it for fun and for learning purposes and developping my abilities, it will help me dealing with apis and understanding more vue js",
+  "author": "Hassane Sow",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "test": "jest"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0",
+    "@nuxtjs/bulma": "^1.2.1",
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "@nuxtjs/dotenv": "^1.4.0"
+  },
+  "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.27",
+    "babel-jest": "^24.1.0",
+    "jest": "^24.1.0",
+    "vue-jest": "^4.0.0-0"
+  }
+}
