@@ -30,10 +30,11 @@ export default {
     },
     data: () => ({
         year: 2020,
-        genre: 0,
+        genre: 12,
         sortBy: 'popularity.desc',
-        url: ''
+        url: 'discover/movie?sort_by=popularity.desc&with_genres=12&primary_release_year=2020'
     }),
+    props: ['genres', 'onUrlChange'],
     methods: {
         handleYearChange({ target: {value} }) {
             this.year = value;
@@ -49,15 +50,11 @@ export default {
         },
         async updateMovies() {
             this.url = `discover/movie?sort_by=${this.sortBy}&with_genres=${this.genre}&primary_release_year=${this.year}`;
-            const { data } = await this.$axios.get(this.url);
-            console.log(data);
+            this.onUrlChange(this.url);
         }
     },
-    computed: {
-        genres: () => [
-            { id: 1, name: "Animation" },
-            { id: 2, name: "Drama" }
-        ]
+    created: function() {
+        this.onUrlChange(this.url);
     }
 }
 </script>

@@ -56,7 +56,8 @@ export default {
 
   env: {
     TMDB_TOKEN: process.env.TMDB_TOKEN || '',
-    API_BASE_URL: process.env.API_BASE_URL || ''
+    API_BASE_URL: process.env.API_BASE_URL || '',
+    IMAGE_BASE_URL: process.env.IMAGE_BASE_URL || ''
   },
 
   /*
