@@ -28,6 +28,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    './plugins/axios'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -52,6 +53,12 @@ export default {
   */
   axios: {
   },
+
+  env: {
+    TMDB_TOKEN: process.env.TMDB_TOKEN || '',
+    API_BASE_URL: process.env.API_BASE_URL || ''
+  },
+
   /*
   ** Build configuration
   */
