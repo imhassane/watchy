@@ -2,7 +2,7 @@
   <div>
     <navbar />
     <search />
-    <div class="container">
+    <div style="padding: 20px 0" class="container">
       <nuxt />
     </div>
   </div>

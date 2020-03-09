@@ -2,9 +2,9 @@
     <div style="margin: 15px 0">
         <div class="columns is-1 is-multiline">
             <div class="column is-2" v-for="m in movies" :key="m.id">
-                <div class="">
+                <nuxt-link :to="getUrl(m.id)">
                     <img :src="getImgCover(m.poster_path)" :alt="m.title" />
-                </div>
+                </nuxt-link>
             </div>
         </div>
     </div>
@@ -17,6 +17,9 @@ export default {
     methods: {
         getImgCover(url) {
             return `${process.env.IMAGE_BASE_URL}${url}`
+        },
+        getUrl(id) {
+            return `/movie/${id}`;
         }
     }
 }
