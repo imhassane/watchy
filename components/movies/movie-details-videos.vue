@@ -8,7 +8,9 @@
             </div>
         </div>
         <div class="columns is-multiline is-1">
-            <div class="column is-half" v-for="v in videos" :key="v.id">
+            <div class="column" v-for="v in videos" :key="v.id"
+                v-bind:class="[ videos.length === 1 ? 'is-' : 'is-half']"
+            >
                 <figure v-if="v.site.toLowerCase() === 'youtube'" class="image is-16by9">
                     <iframe class="has-ratio" width="640" height="360"
                         :src="`https://www.youtube.com/embed/${v.key}?showinfo=0`"
