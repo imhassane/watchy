@@ -1,10 +1,10 @@
 <template>
     <div class="tabs is-toggle is-fullwidth">
         <ul>
-            <li><a href="#"><strong>Discussions</strong></a></li>
-            <li><a href="#"><strong>Reviews</strong></a></li>
-            <li><a href="#"><strong>Videos</strong></a></li>
-            <li><a href="#"><strong>Images</strong></a></li>
+            <li><a href="#"><strong>Add to list</strong></a></li>
+            <li><a href="#"><strong>Mark as favorite</strong></a></li>
+            <li><a href="#"><strong>Add to watchlist</strong></a></li>
+            <li><a href="#"><strong>View trailer</strong></a></li>
         </ul>
     </div>
 </template>
