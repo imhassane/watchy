@@ -13,7 +13,10 @@
   import search from '~/components/search';
 
   export default {
-    components: { navbar, search }
+    components: { navbar, search },
+    mounted: function() {
+      this.$store.dispatch('SET_AUTHENTICATION');
+    }
   }
 </script>
 

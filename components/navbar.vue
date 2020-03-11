@@ -47,13 +47,47 @@
 
             <div class="navbar-end">
             <div class="navbar-item">
-                <div class="buttons">
-                <nuxt-link to="/accounts/register" class="button is-primary">
-                    <strong>Sign up</strong>
-                </nuxt-link>
-                <nuxt-link to="/accounts/login" class="button is-light">
-                    Log in
-                </nuxt-link>
+                <div class="buttons" v-if="!isAuth">
+                    <nuxt-link to="/accounts/register" class="button is-primary">
+                        <strong>Sign up</strong>
+                    </nuxt-link>
+                    <nuxt-link to="/accounts/login" class="button is-light">
+                        Log in
+                    </nuxt-link>
+                </div>
+                <div class="buttons" v-else>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                        Lists
+                        </a>
+
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item">
+                                Favourites
+                            </a>
+                            <a class="navbar-item">
+                                Watch later
+                            </a>
+                        </div>
+                    </div>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                        Account
+                        </a>
+
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item">
+                                My profile
+                            </a>
+                            <a class="navbar-item">
+                                settings
+                            </a>
+                            <hr class="navbar-divider">
+                            <nuxt-link to="/accounts/signout" class="navbar-item">
+                                Sign out
+                            </nuxt-link>
+                        </div>
+                    </div>
                 </div>
             </div>
             </div>
@@ -63,6 +97,9 @@
 
 <script>
 export default {
-    name: 'navbar'
+    name: 'navbar',
+    computed: {
+        isAuth() { return this.$store.state.authenticated; }
+    }
 }
 </script>

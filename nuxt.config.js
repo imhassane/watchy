@@ -46,7 +46,14 @@ export default {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+    '@nuxtjs/apollo'
   ],
+
+  apollo: {
+    clientConfigs: {
+      default: '~/apollo/client-configs/default.js'
+    }
+  },
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
@@ -57,7 +64,9 @@ export default {
   env: {
     TMDB_TOKEN: process.env.TMDB_TOKEN || '',
     API_BASE_URL: process.env.API_BASE_URL || '',
-    IMAGE_BASE_URL: process.env.IMAGE_BASE_URL || ''
+    IMAGE_BASE_URL: process.env.IMAGE_BASE_URL || '',
+    API: process.env.API || '',
+    AUTH_TOKEN: process.env.AUTH_TOKEN || ''
   },
 
   /*
