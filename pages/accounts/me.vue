@@ -46,6 +46,10 @@ import ChangeEmail from "~/components/forms/change-email";
 
 export default {
     head: () => ({ title: "My account"}),
-    components: { ListForm, ListsList, AccountResume, ChangePassword, ChangeEmail }
+    components: { ListForm, ListsList, AccountResume, ChangePassword, ChangeEmail },
+    mounted: function() {
+        if(!this.$store.state.authenticated)
+            this.$router.push('/accounts/login?next=/accounts/me/');
+    }
 }
 </script>

@@ -8,7 +8,7 @@ const httpLink = createHttpLink({ uri: API });
 const middlewareLink = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
-      authorization: process.client ? localStorage.getItem("x-auth-token") : null,
+      authorization: process.client ? localStorage.getItem(process.env.AUTH_TOKEN) : null,
       'Access-Control-Allow-Origin': '*'
     }
   });

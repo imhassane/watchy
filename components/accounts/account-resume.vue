@@ -13,7 +13,7 @@
                     <p><strong>Liked</strong></p>
                 </div>
                 <div class="column is-one-third">
-                    <p class="tag is-light">10</p>
+                    <p class="tag is-light">{{ lists }}</p>
                     <p><strong>Lists</strong></p>
                 </div>
                 <div class="column is-one-third">
@@ -26,6 +26,9 @@
 </template>
 <script>
 export default {
-    name: 'account-resume'
+    name: 'account-resume',
+    computed: {
+        lists() { return this.$store.state.lists.lists.length; }
+    }
 }
 </script>

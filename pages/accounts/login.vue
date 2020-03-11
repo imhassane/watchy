@@ -86,6 +86,7 @@ export default {
                     localStorage.setItem(process.env.AUTH_TOKEN, authenticate);
                     this.errors.authenticationFailed = null;
                     this.errors.success = "You've been logged succesfully";
+                    this.$store.dispatch('SET_AUTHENTICATION');
                     setTimeout(() => this.$router.push('/discover'), 1000);
                 } catch(ex) {
                     this.errors.authenticationFailed = ex.graphQLErrors[0].message;
@@ -96,8 +97,13 @@ export default {
     beforeMount: function() {
         if(process.client) {
             const isAuth = this.$store.state.authenticated;
-            if(isAuth)
-                this.$router.push('/discover');
+            if(isAuth){
+                const { query: {next} } = this.$router.history.current;
+                if(next)
+                    this.$router.push(next);
+                else
+                    this.$router.push('/discover');
+            }
         }
     }
 }
