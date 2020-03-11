@@ -76,12 +76,12 @@
                         </a>
 
                         <div class="navbar-dropdown">
-                            <a class="navbar-item">
+                            <nuxt-link to="/accounts/me" class="navbar-item">
                                 My profile
-                            </a>
-                            <a class="navbar-item">
+                            </nuxt-link>
+                            <nuxt-link to="/accounts/settings" class="navbar-item">
                                 settings
-                            </a>
+                            </nuxt-link>
                             <hr class="navbar-divider">
                             <nuxt-link to="/accounts/signout" class="navbar-item">
                                 Sign out
