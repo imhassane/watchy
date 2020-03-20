@@ -83,7 +83,7 @@
                                 settings
                             </nuxt-link>
                             <hr class="navbar-divider">
-                            <nuxt-link to="/accounts/signout" class="navbar-item">
+                            <nuxt-link to="/accounts/sign-out" class="navbar-item">
                                 Sign out
                             </nuxt-link>
                         </div>
