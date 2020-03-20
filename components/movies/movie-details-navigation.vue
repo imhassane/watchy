@@ -3,8 +3,16 @@
         <div class="tabs is-toggle is-fullwidth">
             <ul>
                 <li><a @click.prevent="showAddToList"><strong>Add to list</strong></a></li>
-                <li><a href="#"><strong>Mark as favorite</strong></a></li>
-                <li><a href="#"><strong>Add to watchlist</strong></a></li>
+                <li>
+                    <a href="#" @click.prevent="movieToFavorites">
+                        <strong>{{ movieInformations.favorite ? "Remove from favorites" : "Mark as favorite" }}</strong>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" @click.prevent="movieToWatchLater">
+                        <strong>{{ movieInformations.watchLater ? "Remove from watch later" : "Add to watch later" }}</strong>
+                    </a>
+                </li>
                 <li><a href="#"><strong>View trailer</strong></a></li>
             </ul>
         </div>
@@ -35,6 +43,26 @@
 <script>
 import gql from "graphql-tag";
 
+const MOVIE_INFORMATIONS = gql`
+    query ($movieId: Int!) {
+        movieInformations(movieId: $movieId) {
+            favorite, watchLater
+        }
+    }
+`;
+
+const MOVIE_TO_FAVORITES = gql`
+    mutation ($movieId: Int!) {
+        movieToFavorites(movieId: $movieId)
+    }
+`;
+
+const MOVIE_TO_WATCH_LATER = gql`
+    mutation ($movieId: Int!) {
+        movieToWatchLater(movieId: $movieId)
+    }
+`;
+
 const ADD_MOVIE_TO_LIST = gql`
     mutation ($listId: Int!, $movieId: Int!) {
         addMovieToList(listId: $listId, movieId: $movieId) {
@@ -45,7 +73,7 @@ const ADD_MOVIE_TO_LIST = gql`
 
 export default {
     name: 'movie-details-navigation',
-    data: () => ({ addToList: true, errors: {}, messages: {} }),
+    data: () => ({ addToList: false, errors: {}, messages: {}, movieInformations: {} }),
     methods: {
         showAddToList: function() {
             this.addToList = true;
@@ -64,6 +92,24 @@ export default {
                 if(ex.graphQLErrors)
                     this.errors.addToList = {id: listId, message: ex.graphQLErrors[0].message};
             }
+        },
+        movieToWatchLater: async function() {
+            try {
+                await this.$apollo.mutate({ mutation: MOVIE_TO_WATCH_LATER, variables: { movieId: parseInt(this.$route.params.id) }});
+                this.movieInformations.watchLater = !this.movieInformations.watchLater;
+            } catch(ex) {
+                if(ex.graphQLErrors)
+                    this.errors.moviesToWatchLater = ex.graphQLErrors[0].message;
+            }
+        },
+        movieToFavorites: async function() {
+            try {
+                await this.$apollo.mutate({ mutation: MOVIE_TO_FAVORITES, variables: { movieId: parseInt(this.$route.params.id) }});
+                this.movieInformations.favorite = !this.movieInformations.favorite;
+            } catch(ex) {
+                if(ex.graphQLErrors)
+                    this.errors.moviesToWatchLater = ex.graphQLErrors[0].message;
+            }
         }
     },
     computed: {
@@ -71,8 +117,12 @@ export default {
     },
     mounted: async function(){
         try {
-           const {data:{lists}} = await this.$apollo.query({ query: gql`query{ lists{id, name} }` });
-           this.$store.commit('lists/setLists', lists);
+            let variables = { movieId: parseInt(this.$route.params.id) };
+            const{data:{movieInformations}} = await this.$apollo.query({ query: MOVIE_INFORMATIONS, variables });
+            this.movieInformations = movieInformations;
+            
+            const {data:{lists}} = await this.$apollo.query({ query: gql`query{ lists{id, name} }` });
+            this.$store.commit('lists/setLists', lists);
        } catch(ex) {
            this.$store.commit('lists/setError', ex.graphQLErrors[0].message);
        }
